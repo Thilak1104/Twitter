@@ -5,7 +5,7 @@ const app = express();
 const TweetRepository = require('./repository/tweet-repository');
 const Comment = require('./models/comment');
 
-app.listen(3002, async () => {
+app.listen(3001, async () => {
     console.log('server started');
     await connect();
     console.log('Mongo db connected');
@@ -23,11 +23,11 @@ app.listen(3002, async () => {
     // tweet.comments.push({content:'first comment'});
     // await tweet.save();
     // console.log(tweet);
-    const tweet = await tweetRepo.getWithComments('65ba901fc511bbce28b1a598');
+    const tweet = await tweetRepo.getAll(0,4);
     // console.log(tweet);
     // const comment = await Comment.create({content: 'new comment'});
     // tweet.comments.push(comment);
     // await tweet.save();
 
-    console.log(tweet);
+    console.log(tweet[0].contentWithEmail);
 });
