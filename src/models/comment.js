@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 
 const commentSchema = new mongoose.Schema({
     content: {
@@ -16,10 +16,16 @@ const commentSchema = new mongoose.Schema({
         enum: ['Tweet','Comment']
     },
     commentable: {
-        type:mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required:true,
         refPath: 'onModel'
-    }
+    },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ]
 },{timestamps: true});
 
 const Comment = mongoose.model('Comment',commentSchema);
